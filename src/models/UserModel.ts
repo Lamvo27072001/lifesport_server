@@ -9,6 +9,7 @@ class UserModel {
       FROM users
       WHERE email ='${email}' 
        LIMIT 1`;
+      
       const result = <User_Interface>await executeDBScript(q).then((res) => {
         if (compareHashPassword(password, res[0].password)) {
           return res[0];
