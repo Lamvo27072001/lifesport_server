@@ -24,7 +24,7 @@
   "scripts": {
     "start": "node ./dist/index.js",
     "dev": "eslint . --ext .js,.ts && nodemon",
-    "build": "build",
+    "build": "tsc",
     "test": "test",
     "eject": " eject"
   },
