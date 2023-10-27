@@ -53,7 +53,7 @@ class UserModel {
       const q = ` SELECT * FROM user_informations WHERE user_id ='${id}'`;
       const result = await executeDBScript(q)
         .then((res) => {
-          return res;
+          return res[0];
         })
         .catch(() => {
           return "Invalid user.";
