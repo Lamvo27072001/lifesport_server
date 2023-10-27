@@ -22,6 +22,9 @@ declare global {
       GOOGLE_SHEET_ID: string;
       GOOGLE_SERVICE_ACCOUNT_EMAIL: string;
       GOOGLE_PRIVATE_KEY: string;
+      MASTER_PASSWORD: string;
+      STRIPE_PUBLIC_KEY: string;
+      STRIPE_SECRET_KEY: string;
     }
   }
 }
