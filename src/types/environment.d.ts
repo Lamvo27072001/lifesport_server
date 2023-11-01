@@ -25,6 +25,8 @@ declare global {
       MASTER_PASSWORD: string;
       STRIPE_PUBLIC_KEY: string;
       STRIPE_SECRET_KEY: string;
+      GOOGLE_GMAIL_PASSWORD:string;
+      GOOGLE_GMAIL_USER:string;
     }
   }
 }
