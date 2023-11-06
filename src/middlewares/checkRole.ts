@@ -1,5 +1,6 @@
-import { Request,Response, NextFunction } from "express";
+import { Request, Response, NextFunction } from "express";
 import decodeToken from "../utils/decodeToken";
+import _ from "lodash";
 const isAdmin = async (
   request: Request,
   response: Response,
@@ -22,7 +23,7 @@ const isMasterAdmin = async (
   response: Response,
   next: NextFunction
 ) => {
-   const { decoded } = await decodeToken(
+  const { decoded } = await decodeToken(
     request.headers.authorization?.split(" ")[1] || ""
   );
   if (decoded.role == "master_admin") {
@@ -38,7 +39,7 @@ const isAgent = async (
   response: Response,
   next: NextFunction
 ) => {
-   const { decoded } = await decodeToken(
+  const { decoded } = await decodeToken(
     request.headers.authorization?.split(" ")[1] || ""
   );
   if (decoded.role == "agent") {
@@ -49,4 +50,23 @@ const isAgent = async (
       .json({ status: "error", message: "Invalid role" });
   }
 };
-export { isAdmin, isMasterAdmin, isAgent };
+const getRole = async (
+  request: Request,
+  response: Response,
+  next: NextFunction
+) => {
+  if (!_.isEmpty(request.headers.authorization)) {
+    const { decoded } = await decodeToken(
+      request.headers.authorization?.split(" ")[1] || ""
+    );
+    
+    if (decoded.role == "master_admin") {
+      request.body.role = "admin";
+      next();
+    }
+  } else {
+    request.body.role = "customer";
+    next();
+  }
+};
+export { isAdmin, isMasterAdmin, isAgent,getRole };
